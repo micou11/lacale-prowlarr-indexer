@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [0.3.1] - 2026-01-02
+
+### Added
+- 🔍 **Keywords filters**: `trim` and `re_replace` to normalize search queries
+- ✅ `missingAttributeEqualsNoResults: true` to avoid false positives
+
+### Changed
+- 🔒 Passkey field type changed from `text` to `password` (masked in UI)
+- 💬 Replaced double quotes with single quotes throughout YAML (cleaner syntax)
+- 📊 Removed Double Upload (event ended) - `uploadvolumefactor: 1`
+
+### Fixed
+- 🔧 Added `default: ''` to passkey field
+
+---
+
+## [0.3.0] - 2026-01-02
 
 ### Added
 - 🧲 **Integrated Magnet Support**: Added `magneturl` field to main indexer

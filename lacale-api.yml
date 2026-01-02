@@ -1,7 +1,7 @@
 ---
 id: lacale-api
 name: La Cale (API)
-description: "La Cale is a French Private Tracker for Movies, TV, Music, Games, Software, Ebooks and XXX"
+description: 'La Cale is a French Private Tracker for Movies, TV, Music, Games, Software, Ebooks and XXX'
 language: fr-FR
 type: private
 encoding: UTF-8
@@ -9,39 +9,39 @@ encoding: UTF-8
 requestDelay: 2
 
 links:
-  - https://la-cale.space/
+  - https://la-cale.space
 
 caps:
   categorymappings:
     # Vidéo
-    - {id: films, cat: Movies/Foreign, desc: "Films"}
-    - {id: series, cat: TV/Foreign, desc: "Séries TV"}
-    - {id: spectacles, cat: TV/Other, desc: "Spectacles"}
+    - {id: films, cat: Movies/Foreign, desc: 'Films'}
+    - {id: series, cat: TV/Foreign, desc: 'Séries TV'}
+    - {id: spectacles, cat: TV/Other, desc: 'Spectacles'}
     # Audio
-    - {id: music, cat: Audio/Foreign, desc: "Musique"}
-    - {id: audio-divers, cat: Audio/Other, desc: "Audio divers"}
+    - {id: music, cat: Audio/Foreign, desc: 'Musique'}
+    - {id: audio-divers, cat: Audio/Other, desc: 'Audio divers'}
     # Jeux
-    - {id: pc, cat: PC/Games, desc: "PC"}
-    - {id: consoles, cat: Console, desc: "Consoles"}
-    - {id: jeux-mobiles, cat: PC/Mobile-Other, desc: "Jeux mobiles"}
+    - {id: pc, cat: PC/Games, desc: 'PC'}
+    - {id: consoles, cat: Console, desc: 'Consoles'}
+    - {id: jeux-mobiles, cat: PC/Mobile-Other, desc: 'Jeux mobiles'}
     # Applications
-    - {id: systemes, cat: PC/ISO, desc: "Systèmes"}
-    - {id: software, cat: PC/0day, desc: "Logiciels"}
+    - {id: systemes, cat: PC/ISO, desc: 'Systèmes'}
+    - {id: software, cat: PC/0day, desc: 'Logiciels'}
     # E-books
-    - {id: romans, cat: Books/EBook, desc: "Romans"}
-    - {id: bd, cat: Books/Comics, desc: "BD"}
-    - {id: documentaires, cat: Books/Technical, desc: "Documentaires"}
+    - {id: romans, cat: Books/EBook, desc: 'Romans'}
+    - {id: bd, cat: Books/Comics, desc: 'BD'}
+    - {id: documentaires, cat: Books/Technical, desc: 'Documentaires'}
     # E-books & Documents
-    - {id: livres, cat: Books/EBook, desc: "Livres"}
-    - {id: presse, cat: Books/Magazines, desc: "Presse"}
-    - {id: education, cat: Books/Technical, desc: "Éducation"}
+    - {id: livres, cat: Books/EBook, desc: 'Livres'}
+    - {id: presse, cat: Books/Magazines, desc: 'Presse'}
+    - {id: education, cat: Books/Technical, desc: 'Éducation'}
     # XXX (default: false to prevent accidental inclusion)
-    - {id: xxx-hetero, cat: XXX, desc: "XXX Hétéro", default: false}
-    - {id: xxx-gay, cat: XXX, desc: "XXX Gay", default: false}
-    - {id: xxx-lesbien, cat: XXX, desc: "XXX Lesbien", default: false}
-    - {id: xxx-trans, cat: XXX, desc: "XXX Trans", default: false}
+    - {id: xxx-hetero, cat: XXX, desc: 'XXX Hétéro', default: false}
+    - {id: xxx-gay, cat: XXX, desc: 'XXX Gay', default: false}
+    - {id: xxx-lesbien, cat: XXX, desc: 'XXX Lesbien', default: false}
+    - {id: xxx-trans, cat: XXX, desc: 'XXX Trans', default: false}
     # Autres
-    - {id: divers, cat: Other/Misc, desc: "Divers"}
+    - {id: divers, cat: Other/Misc, desc: 'Divers'}
 
   modes:
     search: [q]
@@ -52,8 +52,9 @@ caps:
 
 settings:
   - name: passkey
-    type: text
+    type: password
     label: Passkey
+    default: ''
   - name: info_passkey
     type: info
     label: About your Passkey
@@ -69,7 +70,7 @@ settings:
   - name: info_ratio
     type: info
     label: Ratio Requirements
-    default: "Minimum ratio: 1.0 | Minimum seed time: 48 hours | Currently: Global Freeleech + Double Upload active!"
+    default: "Minimum ratio: 1.0 | Minimum seed time: 48 hours | Currently: Global Freeleech active!"
   - name: info_updates
     type: info
     label: Updates
@@ -79,12 +80,12 @@ login:
   path: api/external
   method: get
   inputs:
-    passkey: "{{ .Config.passkey }}"
+    passkey: '{{ .Config.passkey }}'
     q: test
   test:
     path: api/external
     inputs:
-      passkey: "{{ .Config.passkey }}"
+      passkey: '{{ .Config.passkey }}'
       q: test
 
 search:
@@ -93,15 +94,21 @@ search:
       response:
         type: json
 
+  keywordsfilters:
+    - name: trim
+    - name: re_replace
+      args: ['[\s]+', ' ']
+
   inputs:
-    passkey: "{{ .Config.passkey }}"
-    q: "{{ .Keywords }}"
+    passkey: '{{ .Config.passkey }}'
+    q: '{{ .Keywords }}'
     # API accepts single category slug (e.g., films, series, music)
     # Note: API returns max 50 results, sorted by date descending
-    cat: "{{ range .Categories }}{{.}}{{end}}"
+    cat: '{{ range .Categories }}{{.}}{{end}}'
 
   rows:
     selector: $
+    missingAttributeEqualsNoResults: true
 
   fields:
     _id:
@@ -119,9 +126,9 @@ search:
       # Direct .torrent download link from API
       selector: link
     magneturl:
-      # Magnet link with tracker announce URL (used when "Prefer Magnet URL" is enabled)
+      # Magnet link with tracker announce URL (used when 'Prefer Magnet URL' is enabled)
       # Note: Magnet links do NOT work for cross-seeding!
-      text: "magnet:?xt=urn:btih:{{ .Result.infohash }}&tr=https%3A%2F%2Ftracker.la-cale.space%2Fannounce%3Fpasskey%3D{{ .Config.passkey }}"
+      text: 'magnet:?xt=urn:btih:{{ .Result.infohash }}&tr=https%3A%2F%2Ftracker.la-cale.space%2Fannounce%3Fpasskey%3D{{ .Config.passkey }}'
     size:
       selector: size
     date:
@@ -129,7 +136,7 @@ search:
       selector: pubDate
       filters:
         - name: dateparse
-          args: "2006-01-02T15:04:05.999Z"
+          args: '2006-01-02T15:04:05.999Z'
     seeders:
       selector: seeders
     leechers:
@@ -138,8 +145,8 @@ search:
       # 0 = Freeleech (download doesn't count)
       text: 0
     uploadvolumefactor:
-      # 2 = Double upload
-      text: 2
+      # 1 = Normal upload
+      text: 1
     minimumratio:
       text: 1.0
     minimumseedtime:
