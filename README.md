@@ -64,8 +64,6 @@
 | 📦 Décodage JSON natif | ⚓ |
 | 🔍 Recherche multi-modes | ⚓ |
 | 🎁 Freeleech global | ⚓ |
-| ⚡ Double Upload | ⚓ |
-| 🧲 Support Magnet intégré | ⚓ |
 
 ---
 
@@ -80,10 +78,6 @@ Copiez `lacale-api.yml` dans la cale de Prowlarr :
 | 🐧 Linux | `~/.config/Prowlarr/Definitions/Custom/` |
 | 🪟 Windows | `%AppData%\Prowlarr\Definitions\Custom\` |
 | 🐳 Docker | `/config/Definitions/Custom/` |
-
-> 💡 **Astuce Magnet :** L'indexer supporte les deux modes ! Activez **"Prefer Magnet URL"** dans Prowlarr (Settings → Indexers) pour utiliser les liens magnet au lieu des fichiers .torrent.
->
-> ⚠️ **Attention :** Les liens magnet ne fonctionnent **PAS** pour le cross-seeding !
 
 ### Étape 2 — Relancer le navire
 
@@ -124,7 +118,9 @@ sudo systemctl restart prowlarr
 | Cale | Slug |
 |:-----|:-----|
 | Films | `films` |
-| Séries TV | `series` |
+| Films HD | `films-hd` |
+| Films 4K | `films-4k` |
+| Animation | `animation` |
 | Spectacles | `spectacles` |
 
 </td><td>
@@ -132,6 +128,7 @@ sudo systemctl restart prowlarr
 | Cale | Slug |
 |:-----|:-----|
 | Séries TV | `series` |
+| Séries HD | `s-ries-hd` |
 
 </td></tr>
 </table>
@@ -143,6 +140,9 @@ sudo systemctl restart prowlarr
 | Cale | Slug |
 |:-----|:-----|
 | Musique | `music` |
+| FLAC | `flac` |
+| MP3 | `mp3` |
+| M4A | `m4a` |
 | Audio divers | `audio-divers` |
 
 </td><td>
@@ -159,6 +159,7 @@ sudo systemctl restart prowlarr
 |:-----|:-----|
 | Systèmes | `systemes` |
 | Logiciels | `software` |
+| Linux | `linux` |
 
 </td></tr>
 </table>
@@ -169,6 +170,7 @@ sudo systemctl restart prowlarr
 
 | Cale | Slug |
 |:-----|:-----|
+| XXX | `xxx` |
 | Hétéro | `xxx-hetero` |
 | Gay | `xxx-gay` |
 | Lesbien | `xxx-lesbien` |
@@ -178,6 +180,7 @@ sudo systemctl restart prowlarr
 
 | Cale | Slug |
 |:-----|:-----|
+| Autres | `autres` |
 | Divers | `divers` |
 
 </td></tr>

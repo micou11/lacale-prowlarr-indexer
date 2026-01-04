@@ -42,7 +42,7 @@ GET /api/external
 |-----------|----------|-------------|
 | `passkey` | Yes | Your secret API key |
 | `q` | No | Search query (max 200 characters, normalized: lowercase, accents removed) |
-| `cat` | No | Category slug (max 64 characters, e.g., `films`, `series`, `music`) |
+| `cat` | No | Category slug (can be repeated, e.g., `&cat=films&cat=series`) |
 
 #### Response
 
@@ -55,8 +55,8 @@ Returns a JSON array with up to **50 results**, sorted by date descending. Only 
     "guid": "abc123xyz",
     "size": 4294967296,
     "pubDate": "2026-01-01T12:00:00.000Z",
-    "link": "https://la-cale.space/api/download/abc123xyz?passkey=...",
-    "category": "films",
+    "link": "https://la-cale.space/torrents/abc123xyz",
+    "category": "Films HD",
     "seeders": 42,
     "leechers": 5,
     "infoHash": "a1b2c3d4e5f6..."
@@ -71,12 +71,20 @@ Returns a JSON array with up to **50 results**, sorted by date descending. Only 
 | `title` | string | Torrent name |
 | `guid` | string | Internal torrent ID |
 | `size` | number | File size in bytes |
-| `pubDate` | string | Publication date (ISO 8601 format) |
-| `link` | string | Download URL for .torrent file |
-| `category` | string | Category slug |
+| `pubDate` | string | Publication date (ISO 8601 format with milliseconds) |
+| `link` | string | Torrent details page URL |
+| `category` | string | Category name (e.g., "Films HD", "Séries TV") |
 | `seeders` | number | Number of seeders |
 | `leechers` | number | Number of leechers |
-| `infoHash` | string | Torrent info hash (hex) |
+| `infoHash` | string | Torrent info hash (hex, used for download endpoint) |
+
+#### Download Endpoint
+
+To download a torrent file, use the infoHash:
+
+```
+GET /api/torrents/download/{infoHash}?passkey=YOUR_PASSKEY
+```
 
 #### Caching
 

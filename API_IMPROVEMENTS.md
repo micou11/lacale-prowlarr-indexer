@@ -293,18 +293,16 @@ GET /api/user?passkey=XXX
 
 ## ⚠️ Known Issues
 
-### 🔴 Category Filtering Not Working
+### ✅ ~~Category Filtering Not Working~~ (FIXED in v0.4.0)
 
-**Problem:** The `cat` parameter in the API doesn't work - it returns no results when used.
+**Status:** RESOLVED
 
-**Impact:** 
-- The `cat` parameter is currently disabled in the indexer definition (commented out)
-- When Radarr/Sonarr sync with Prowlarr, they request content using category filters
-- Since category filtering doesn't work, the sync fails with:
-```
-No Results in configured categories. See FAQ Entry: Prowlarr will not sync X Indexer to App
-```
+**Solution:** 
+- Category filtering now works using the `$raw` parameter with Go template: `{{ range .Categories }}&cat={{.}}{{end}}`
+- Supports multiple categories via repeated `cat` parameters: `?cat=films&cat=series`
+- Category names from API are normalized to slugs via regex filters
 
+---
 
 ### 🟠 Cloudflare Protection
 
@@ -328,6 +326,8 @@ Cloudflare protection detected for [La Cale (API)], Flaresolverr may be required
 ## 🏆 Priority Summary
 
 ### 🔴 Critical (High Impact)
+
+> ✅ **Category filtering is now working** (v0.4.0)
 
 | Feature | Benefit |
 |---------|---------|
@@ -384,13 +384,13 @@ All fields supported by Prowlarr's Cardigann v11 schema:
 | `size` | ✅ | Size in bytes |
 | `seeders` | ✅ | Seeder count |
 | `category` | ✅ | Category name |
-| `download` | ✅ | Download URL |
+| `download` | ✅ | Download URL (via infoHash endpoint) |
 
 ### Optional Fields
 
 | Field | Status | Description |
 |-------|--------|-------------|
-| `infohash` | ✅ | Torrent hash |
+| `infohash` | ✅ | Torrent hash (used for download URL) |
 | `leechers` | ✅ | Leecher count |
 | `date` | ✅ | Publication date |
 | `details` | ⚠️ Fixed `/` | Torrent details page |
@@ -434,4 +434,4 @@ If you're a La Cale developer and want to discuss these improvements, feel free 
 
 ---
 
-*Last updated: December 2025* 🏴‍☠️
+*Last updated: January 2026* 🏴‍☠️

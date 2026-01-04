@@ -90,24 +90,45 @@ The API returns a JSON array directly:
 
 ### Current Categories
 
-| Category (API) | Newznab Category | Parent |
-|----------------|------------------|--------|
-| BD | Books/Comics | Ebooks |
-| Romans | Books/EBook | Ebooks |
-| Documentaires | Books/Technical | Ebooks |
-| Films HD | Movies/HD | Movies |
-| Films 4K | Movies/UHD | Movies |
-| Animation | Movies/Other | Movies |
-| Séries HD | TV/HD | TV |
-| Séries VOSTFR | TV/Foreign | TV |
-| FLAC | Audio/Lossless | Music |
-| MP3 | Audio/MP3 | Music |
-| PC | PC/Games | Games |
-| Consoles | Console | Games |
-| Linux | PC/ISO | Software |
-| Mac | PC/Mac | Software |
-| Windows | PC/0day | Software |
-| XXX | XXX | Adult |
+| Category (API) | Slug | Newznab Category |
+|----------------|------|------------------|
+| Vidéo | `video` | Movies |
+| Films | `films` | Movies |
+| Films HD | `films-hd` | Movies/HD |
+| Films 4K | `films-4k` | Movies/UHD |
+| Animation | `animation` | Movies |
+| Séries TV | `series` | TV |
+| Séries HD | `s-ries-hd` | TV/HD |
+| Spectacles | `spectacles` | TV/Other |
+| Audio | `audio` | Audio |
+| Musique | `music` | Audio |
+| FLAC | `flac` | Audio/Lossless |
+| MP3 | `mp3` | Audio/MP3 |
+| M4A | `m4a` | Audio/Other |
+| Audio divers | `audio-divers` | Audio/Other |
+| Jeux | `games` | PC/Games |
+| PC | `pc` | PC/Games |
+| Consoles | `consoles` | Console |
+| Jeux mobiles | `jeux-mobiles` | PC/Mobile-Other |
+| Applications | `applications` | PC/0day |
+| Logiciels | `software` | PC/0day |
+| Linux | `linux` | PC/0day |
+| Systèmes | `systemes` | PC/ISO |
+| E-books | `ebooks` | Books/EBook |
+| Romans | `romans` | Books/EBook |
+| BD | `bd` | Books/Comics |
+| Documentaires | `documentaires` | Books/Technical |
+| E-books & Documents | `ebooks-documents` | Books/EBook |
+| Livres | `livres` | Books/EBook |
+| Presse | `presse` | Books/Mags |
+| Éducation | `education` | Books/Technical |
+| XXX | `xxx` | XXX |
+| Hétéro | `xxx-hetero` | XXX |
+| Gay | `xxx-gay` | XXX |
+| Lesbien | `xxx-lesbien` | XXX |
+| Trans | `xxx-trans` | XXX |
+| Autres | `autres` | Other/Misc |
+| Divers | `divers` | Other/Misc |
 
 ### Adding New Categories
 

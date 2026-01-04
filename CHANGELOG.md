@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0] - 2026-01-04
+
+### Added
+- 🏷️ **New categories**: Added parent categories (`video`, `audio`, `games`, `applications`, `ebooks`, `ebooks-documents`, `xxx`, `autres`)
+- 🎬 **Films HD & 4K**: Added `films-hd` and `films-4k` categories for better quality filtering
+- 🔄 **Category normalization**: API category names are now properly converted to slugs via regex filters
+- 📥 **Download via infoHash**: Download URL now uses `/api/torrents/download/<infoHash>?passkey=` endpoint
+
+### Changed
+- 📝 **All comments in English**: Standardized all YAML comments to English
+- 🏷️ **32 categories**: Expanded from 22 to 32 categories with full hierarchy support
+- 🔧 **Category filters**: Added comprehensive regex filters to normalize category names from API responses
+
+### Removed
+- 🗑️ **Magnet support removed**: Private tracker doesn't support magnet links
+- 🗑️ **Double Upload removed**: Event ended
+
+### Fixed
+- 🐛 **Date parsing**: Fixed ISO 8601 date format handling (Cardigann pre-converts to US format)
+- 🐛 **Category matching**: Fixed category filtering with proper `$raw` template syntax
+- 🐛 **Download URL**: Fixed double `/api/api/` path issue with absolute path
+
+---
+
 ## [0.3.1] - 2026-01-02
 
 ### Added
