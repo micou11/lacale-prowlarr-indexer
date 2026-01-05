@@ -16,8 +16,6 @@ caps:
     # Video (parent + children)
     - {id: video, cat: Movies, desc: 'Vidéo'}
     - {id: films, cat: Movies, desc: 'Films'}
-    - {id: films-4k, cat: Movies/UHD, desc: 'Films 4K'}
-    - {id: films-hd, cat: Movies/HD, desc: 'Films HD'}
     - {id: animation, cat: Movies, desc: 'Animation'}
     - {id: series, cat: TV, desc: 'Séries TV'}
     - {id: s-ries-hd, cat: TV/HD, desc: 'Séries HD'}
@@ -51,10 +49,10 @@ caps:
     - {id: education, cat: Books/Technical, desc: 'Éducation'}
     # XXX (parent + children, default: false)
     - {id: xxx, cat: XXX, desc: 'XXX', default: false}
-    - {id: xxx-hetero, cat: XXX, desc: 'Hétéro', default: false}
-    - {id: xxx-gay, cat: XXX, desc: 'Gay', default: false}
-    - {id: xxx-lesbien, cat: XXX, desc: 'Lesbien', default: false}
-    - {id: xxx-trans, cat: XXX, desc: 'Trans', default: false}
+    - {id: h-t-ro, cat: XXX, desc: 'Hétéro', default: false}
+    - {id: gay, cat: XXX, desc: 'Gay', default: false}
+    - {id: lesbien, cat: XXX, desc: 'Lesbien', default: false}
+    - {id: trans, cat: XXX, desc: 'Trans', default: false}
     # Other (parent + children)
     - {id: autres, cat: Other/Misc, desc: 'Autres'}
     - {id: divers, cat: Other/Misc, desc: 'Divers'}
@@ -178,9 +176,9 @@ search:
         - name: re_replace
           args: ["(?i)^animations?$", "animation"]
         - name: re_replace
-          args: ["(?i)^films?\\s*4k$", "films-4k"]
+          args: ["(?i)^films?\\s*4k$", "films"]
         - name: re_replace
-          args: ["(?i)^films?\\s*hd$", "films-hd"]
+          args: ["(?i)^films?\\s*hd$", "films"]
         - name: re_replace
           args: ["(?i)^films?$", "films"]
         - name: re_replace
@@ -237,21 +235,21 @@ search:
           args: ["(?i)^e-?books?\\s*[&e]\\s*documents?$", "ebooks-documents"]
         # XXX
         - name: re_replace
-          args: ["(?i)^xxx[\\s-]*h[ée]t[ée]ro$", "xxx-hetero"]
+          args: ["(?i)^xxx[\\s-]*h[ée]t[ée]ro$", "h-t-ro"]
         - name: re_replace
-          args: ["(?i)^xxx[\\s-]*gay$", "xxx-gay"]
+          args: ["(?i)^xxx[\\s-]*gay$", "gay"]
         - name: re_replace
-          args: ["(?i)^xxx[\\s-]*lesbien(ne)?s?$", "xxx-lesbien"]
+          args: ["(?i)^xxx[\\s-]*lesbien(ne)?s?$", "lesbien"]
         - name: re_replace
-          args: ["(?i)^xxx[\\s-]*trans$", "xxx-trans"]
+          args: ["(?i)^xxx[\\s-]*trans$", "trans"]
         - name: re_replace
-          args: ["(?i)^h[ée]t[ée]ro$", "xxx-hetero"]
+          args: ["(?i)^h[ée]t[ée]ro$", "h-t-ro"]
         - name: re_replace
-          args: ["(?i)^gay$", "xxx-gay"]
+          args: ["(?i)^gay$", "gay"]
         - name: re_replace
-          args: ["(?i)^lesbien(ne)?s?$", "xxx-lesbien"]
+          args: ["(?i)^lesbien(ne)?s?$", "lesbien"]
         - name: re_replace
-          args: ["(?i)^trans$", "xxx-trans"]
+          args: ["(?i)^trans$", "trans"]
         - name: re_replace
           args: ["(?i)^xxx$", "xxx"]
         # Other
