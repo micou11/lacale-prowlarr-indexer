@@ -94,8 +94,6 @@ The API returns a JSON array directly:
 |----------------|------|------------------|
 | Vidéo | `video` | Movies |
 | Films | `films` | Movies |
-| Films HD | `films-hd` | Movies/HD |
-| Films 4K | `films-4k` | Movies/UHD |
 | Animation | `animation` | Movies |
 | Séries TV | `series` | TV |
 | Séries HD | `s-ries-hd` | TV/HD |
@@ -123,12 +121,14 @@ The API returns a JSON array directly:
 | Presse | `presse` | Books/Mags |
 | Éducation | `education` | Books/Technical |
 | XXX | `xxx` | XXX |
-| Hétéro | `xxx-hetero` | XXX |
-| Gay | `xxx-gay` | XXX |
-| Lesbien | `xxx-lesbien` | XXX |
-| Trans | `xxx-trans` | XXX |
+| Hétéro | `h-t-ro` | XXX |
+| Gay | `gay` | XXX |
+| Lesbien | `lesbien` | XXX |
+| Trans | `trans` | XXX |
 | Autres | `autres` | Other/Misc |
 | Divers | `divers` | Other/Misc |
+
+Note: "Films HD" and "Films 4K" categories are normalized to `films` via regex filters.
 
 ### Adding New Categories
 

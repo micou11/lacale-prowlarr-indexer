@@ -214,6 +214,8 @@ Based on the `/api/external/meta` endpoint:
 | `series` | Séries TV |
 | `spectacles` | Spectacles |
 
+Note: "Films HD" and "Films 4K" are normalized to `films` in the indexer.
+
 ### Audio
 | Slug | Description |
 |------|-------------|
@@ -246,10 +248,10 @@ Based on the `/api/external/meta` endpoint:
 ### XXX (Adult)
 | Slug | Description |
 |------|-------------|
-| `xxx-hetero` | XXX Hétéro |
-| `xxx-gay` | XXX Gay |
-| `xxx-lesbien` | XXX Lesbien |
-| `xxx-trans` | XXX Trans |
+| `h-t-ro` | XXX Hétéro |
+| `gay` | XXX Gay |
+| `lesbien` | XXX Lesbien |
+| `trans` | XXX Trans |
 
 ### Other
 | Slug | Description |

@@ -123,8 +123,6 @@ sudo systemctl restart prowlarr
 | Cale | Slug |
 |:-----|:-----|
 | Films | `films` |
-| Films HD | `films-hd` |
-| Films 4K | `films-4k` |
 | Animation | `animation` |
 | Spectacles | `spectacles` |
 
@@ -176,10 +174,10 @@ sudo systemctl restart prowlarr
 | Cale | Slug |
 |:-----|:-----|
 | XXX | `xxx` |
-| Hétéro | `xxx-hetero` |
-| Gay | `xxx-gay` |
-| Lesbien | `xxx-lesbien` |
-| Trans | `xxx-trans` |
+| Hétéro | `h-t-ro` |
+| Gay | `gay` |
+| Lesbien | `lesbien` |
+| Trans | `trans` |
 
 </td><td>
 
@@ -187,6 +185,8 @@ sudo systemctl restart prowlarr
 |:-----|:-----|
 | Autres | `autres` |
 | Divers | `divers` |
+
+*Note : les catégories "Films HD" et "Films 4K" sont normalisées vers `films` par l'indexer.*
 
 </td></tr>
 </table>
