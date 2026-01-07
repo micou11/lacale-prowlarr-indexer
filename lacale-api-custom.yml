@@ -263,11 +263,9 @@ search:
     infohash:
       selector: infoHash
     download:
-      # Download via infoHash endpoint (works without session)
-      text: '{{ .Result.infohash }}'
+      # Use API-provided link and append passkey
+      selector: link
       filters:
-        - name: prepend
-          args: '/api/torrents/download/'
         - name: append
           args: '?passkey={{ .Config.passkey }}'
     size:
