@@ -45,6 +45,9 @@
 > [!CAUTION]
 > **🛡️ PROTECTION CLOUDFLARE** — En cas d'attaque DDoS, La Cale peut activer la protection anti-DDoS de Cloudflare, rendant temporairement l'indexer inopérant. En temps normal, l'API est exclue de cette protection. Si Cloudflare est actif, la seule solution est d'utiliser un proxy comme [Byparr](https://github.com/ThePhaseless/Byparr) ou [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr).
 
+> [!NOTE]
+> **⚓ Dépôt actif** — Le dépôt original est archivé. Ce fork est désormais la source maintenue : https://github.com/micou11/lacale-prowlarr-indexer
+
 ---
 
 ## ✨ Équipements du navire

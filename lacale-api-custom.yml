@@ -98,7 +98,7 @@ settings:
   - name: info_updates
     type: info
     label: Updates
-    default: "This is a custom indexer that requires manual updates. Get the latest version at <a href=\"https://github.com/JigSawFr/lacale-prowlarr-indexer\" target=\"_blank\">github.com/JigSawFr/lacale-prowlarr-indexer</a>"
+    default: "This is a custom indexer that requires manual updates. Get the latest version at <a href=\"https://github.com/micou11/lacale-prowlarr-indexer\" target=\"_blank\">github.com/micou11/lacale-prowlarr-indexer</a>"
 
 login:
   path: api/external
