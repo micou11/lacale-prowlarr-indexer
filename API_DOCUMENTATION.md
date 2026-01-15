@@ -42,6 +42,7 @@ GET /api/external
 |-----------|----------|-------------|
 | `passkey` | Yes | Your secret API key |
 | `q` | No | Search query (max 200 characters, normalized: lowercase, accents removed) |
+| `tmdbId` | No | TMDB ID for exact catalog matching (movies/TV shows) |
 | `cat` | No | Category slug (can be repeated, e.g., `&cat=films&cat=series`) |
 
 #### Response
@@ -211,8 +212,11 @@ Based on the `/api/external/meta` endpoint:
 | Slug | Description |
 |------|-------------|
 | `films` | Films |
+| `animation` | Animation |
 | `series` | Séries TV |
-| `spectacles` | Spectacles |
+| `s-ries-hd` | Séries HD |
+| `spectacles-concerts` | Spectacles & Concerts |
+| `sports` | Sports |
 
 Note: "Films HD" and "Films 4K" are normalized to `films` in the indexer.
 
@@ -220,43 +224,48 @@ Note: "Films HD" and "Films 4K" are normalized to `films` in the indexer.
 | Slug | Description |
 |------|-------------|
 | `music` | Musique |
+| `flac` | FLAC |
+| `mp3` | MP3 |
+| `m4a` | M4A |
 | `audio-divers` | Audio divers |
+| `audiobooks` | Audiobooks |
+| `podcast` | Podcast |
 
 ### Games
 | Slug | Description |
 |------|-------------|
 | `pc` | PC Games |
-| `consoles` | Console Games |
-| `jeux-mobiles` | Mobile Games |
+| `nintendo` | Nintendo |
+| `playstation` | Playstation |
+| `sega` | Sega |
+| `xbox` | Xbox |
+| `t-l-phones` | Téléphones (Mobile) |
 
 ### Applications
 | Slug | Description |
 |------|-------------|
 | `systemes` | Operating Systems |
 | `software` | Software |
+| `linux` | Linux |
 
 ### E-books
 | Slug | Description |
 |------|-------------|
-| `romans` | Novels |
-| `bd` | Comics |
-| `documentaires` | Documentaries |
 | `livres` | Books |
 | `presse` | Press/Magazines |
-| `education` | Education |
+| `comics` | Comics |
+| `mangas` | Mangas |
+| `divers` | Miscellaneous |
 
 ### XXX (Adult)
 | Slug | Description |
 |------|-------------|
-| `h-t-ro` | XXX Hétéro |
-| `gay` | XXX Gay |
-| `lesbien` | XXX Lesbien |
-| `trans` | XXX Trans |
+| `xxx` | XXX |
 
 ### Other
 | Slug | Description |
 |------|-------------|
-| `divers` | Miscellaneous |
+| `autres` | Autres |
 
 ---
 

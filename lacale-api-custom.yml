@@ -19,7 +19,8 @@ caps:
     - {id: animation, cat: Movies, desc: 'Animation'}
     - {id: series, cat: TV, desc: 'Séries TV'}
     - {id: s-ries-hd, cat: TV/HD, desc: 'Séries HD'}
-    - {id: spectacles, cat: TV/Other, desc: 'Spectacles'}
+    - {id: spectacles-concerts, cat: TV/Other, desc: 'Spectacles & Concerts'}
+    - {id: sports, cat: TV/Sport, desc: 'Sports'}
     # Audio (parent + children)
     - {id: audio, cat: Audio, desc: 'Audio'}
     - {id: music, cat: Audio, desc: 'Musique'}
@@ -27,40 +28,37 @@ caps:
     - {id: mp3, cat: Audio/MP3, desc: 'MP3'}
     - {id: m4a, cat: Audio/Other, desc: 'M4A'}
     - {id: audio-divers, cat: Audio/Other, desc: 'Audio divers'}
+    - {id: audiobooks, cat: Audio/Audiobook, desc: 'Audiobooks'}
+    - {id: podcast, cat: Audio/Other, desc: 'Podcast'}
     # Games (parent + children)
     - {id: games, cat: PC/Games, desc: 'Jeux'}
     - {id: pc, cat: PC/Games, desc: 'PC'}
-    - {id: consoles, cat: Console, desc: 'Consoles'}
-    - {id: jeux-mobiles, cat: PC/Mobile-Other, desc: 'Jeux mobiles'}
+    - {id: nintendo, cat: Console/NDS, desc: 'Nintendo'}
+    - {id: playstation, cat: Console/PS4, desc: 'Playstation'}
+    - {id: sega, cat: Console/Other, desc: 'Sega'}
+    - {id: xbox, cat: Console/Xbox, desc: 'Xbox'}
+    - {id: t-l-phones, cat: PC/Mobile-Other, desc: 'Téléphones'}
     # Applications (parent + children)
     - {id: applications, cat: PC/0day, desc: 'Applications'}
     - {id: software, cat: PC/0day, desc: 'Logiciels'}
     - {id: linux, cat: PC/0day, desc: 'Linux'}
     - {id: systemes, cat: PC/ISO, desc: 'Systèmes'}
     # E-books (parent + children)
-    - {id: ebooks, cat: Books/EBook, desc: 'E-books'}
-    - {id: romans, cat: Books/EBook, desc: 'Romans'}
-    - {id: bd, cat: Books/Comics, desc: 'BD'}
-    - {id: documentaires, cat: Books/Technical, desc: 'Documentaires'}
-    # E-books & Documents (parent + children)
-    - {id: ebooks-documents, cat: Books/EBook, desc: 'E-books & Documents'}
+    - {id: e-books, cat: Books/EBook, desc: 'E-books'}
     - {id: livres, cat: Books/EBook, desc: 'Livres'}
     - {id: presse, cat: Books/Mags, desc: 'Presse'}
-    - {id: education, cat: Books/Technical, desc: 'Éducation'}
-    # XXX (parent + children, default: false)
+    - {id: comics, cat: Books/Comics, desc: 'Comics'}
+    - {id: mangas, cat: Books/Comics, desc: 'Mangas'}
+    - {id: divers, cat: Books/Other, desc: 'Divers'}
+    # XXX (default: false)
     - {id: xxx, cat: XXX, desc: 'XXX', default: false}
-    - {id: h-t-ro, cat: XXX, desc: 'Hétéro', default: false}
-    - {id: gay, cat: XXX, desc: 'Gay', default: false}
-    - {id: lesbien, cat: XXX, desc: 'Lesbien', default: false}
-    - {id: trans, cat: XXX, desc: 'Trans', default: false}
-    # Other (parent + children)
+    # Other
     - {id: autres, cat: Other/Misc, desc: 'Autres'}
-    - {id: divers, cat: Other/Misc, desc: 'Divers'}
 
   modes:
     search: [q]
-    tv-search: [q, season, ep]
-    movie-search: [q]
+    tv-search: [q, season, ep, tmdbid]
+    movie-search: [q, tmdbid]
     music-search: [q]
     book-search: [q]
 
@@ -144,6 +142,7 @@ search:
   inputs:
     passkey: '{{ .Config.passkey }}'
     q: '{{ .Keywords }}'
+    tmdbId: '{{ .Query.TMDBID }}'
     # API accepts multiple cat parameters (e.g., &cat=films&cat=series)
     $raw: '{{ range .Categories }}&cat={{.}}{{end}}'
 
@@ -182,7 +181,9 @@ search:
         - name: re_replace
           args: ["(?i)^films?$", "films"]
         - name: re_replace
-          args: ["(?i)^spectacles?$", "spectacles"]
+          args: ["(?i)^spectacles?(\\s*[&e]\\s*concerts?)?$", "spectacles-concerts"]
+        - name: re_replace
+          args: ["(?i)^sports?$", "sports"]
         - name: re_replace
           args: ["(?i)^vid[ée]o$", "video"]
         # Audio - order matters: more specific patterns first
@@ -198,11 +199,21 @@ search:
           args: ["(?i)^musiques?$", "music"]
         - name: re_replace
           args: ["(?i)^audio$", "audio"]
+        - name: re_replace
+          args: ["(?i)^audiobooks?$", "audiobooks"]
+        - name: re_replace
+          args: ["(?i)^podcasts?$", "podcast"]
         # Games
         - name: re_replace
-          args: ["(?i)^jeux\\s*mobiles?$", "jeux-mobiles"]
+          args: ["(?i)^nintendo$", "nintendo"]
         - name: re_replace
-          args: ["(?i)^consoles?$", "consoles"]
+          args: ["(?i)^playstation$", "playstation"]
+        - name: re_replace
+          args: ["(?i)^sega$", "sega"]
+        - name: re_replace
+          args: ["(?i)^xbox$", "xbox"]
+        - name: re_replace
+          args: ["(?i)^t[ée]l[ée]phones?$", "t-l-phones"]
         - name: re_replace
           args: ["(?i)^pc(\\s*games?)?$", "pc"]
         - name: re_replace
@@ -216,45 +227,23 @@ search:
           args: ["(?i)^(logiciels?|software)$", "software"]
         - name: re_replace
           args: ["(?i)^applications?$", "applications"]
-        # E-books & Documents
-        - name: re_replace
-          args: ["(?i)^romans?$", "romans"]
-        - name: re_replace
-          args: ["(?i)^(bd|bande[s-]?dessin[ée]e?s?)$", "bd"]
-        - name: re_replace
-          args: ["(?i)^documentaires?$", "documentaires"]
+        # E-books
         - name: re_replace
           args: ["(?i)^livres?$", "livres"]
         - name: re_replace
           args: ["(?i)^presse$", "presse"]
         - name: re_replace
-          args: ["(?i)^[ée]ducation$", "education"]
+          args: ["(?i)^comics?$", "comics"]
         - name: re_replace
-          args: ["(?i)^e-?books?$", "ebooks"]
+          args: ["(?i)^mangas?$", "mangas"]
         - name: re_replace
-          args: ["(?i)^e-?books?\\s*[&e]\\s*documents?$", "ebooks-documents"]
+          args: ["(?i)^divers$", "divers"]
+        - name: re_replace
+          args: ["(?i)^e-?books?$", "e-books"]
         # XXX
-        - name: re_replace
-          args: ["(?i)^xxx[\\s-]*h[ée]t[ée]ro$", "h-t-ro"]
-        - name: re_replace
-          args: ["(?i)^xxx[\\s-]*gay$", "gay"]
-        - name: re_replace
-          args: ["(?i)^xxx[\\s-]*lesbien(ne)?s?$", "lesbien"]
-        - name: re_replace
-          args: ["(?i)^xxx[\\s-]*trans$", "trans"]
-        - name: re_replace
-          args: ["(?i)^h[ée]t[ée]ro$", "h-t-ro"]
-        - name: re_replace
-          args: ["(?i)^gay$", "gay"]
-        - name: re_replace
-          args: ["(?i)^lesbien(ne)?s?$", "lesbien"]
-        - name: re_replace
-          args: ["(?i)^trans$", "trans"]
         - name: re_replace
           args: ["(?i)^xxx$", "xxx"]
         # Other
-        - name: re_replace
-          args: ["(?i)^divers$", "divers"]
         - name: re_replace
           args: ["(?i)^autres?$", "autres"]
     details:
